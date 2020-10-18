@@ -1,13 +1,14 @@
-import React from 'react';
+import React from 'react'
 import './App.css';
-import Search from './components/Search';
+import Navbar from './components/Navbar';
+import Routes from './router/Router';
 
 
 function App() {
 
   return (
     <div className="App">
-          <Search />
+          <Routes />
     </div>
   );
 }

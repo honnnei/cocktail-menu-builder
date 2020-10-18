@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
-import { Cocktail as CocktailType } from '../api/api';
 
+type Props = {
+  id: string,
+  description: string,
+  image_url: string
+}
 
-function Drink() {
+const Drink: React.FC<Props> = ({
+  id, 
+  description, 
+  image_url
+}) => {
 
-    const [ ingredient, setIngredient ] = useState<string>('');
-    const [ searchResults, setSearchResults] = useState<Cocktail[]>([]);
-
-  const handleOnClick = async (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const cocktails = await searchCocktailsByIngredient(ingredient);
-    setSearchResults(cocktails);
-
-  }
   return (
-    <div className="Search">
-              <div key={index}>
-                  <p>{cocktail.strDrink}</p>
-                  <img src={cocktail.strDrinkThumb} height="100" />
-              </div>
+    <div className="drink-card">
+      <p>{description}</p>
+      <img className="drink-image" src={image_url}/>
     </div>
   );
 }

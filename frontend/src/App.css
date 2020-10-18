@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.drink-card {
+  border: #282c34 solid 1px;
+  padding: 1em;
+  margin: 0.5em;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 200px;
+}
+
+.drink-card:hover {
+  height: 400px;
+  width: 300px;
+}
+
+.drink-image {
+  height: 200px;
+  width: auto;
+}
