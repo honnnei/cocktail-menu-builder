@@ -8,6 +8,7 @@ export interface Cocktail {
 
 export type DrinkDetails = {
     dateModified: string,
+    drinkIngredients: string[],
     idDrink: string,
     strAlcoholic: string,
     strCategory: string,
@@ -70,5 +71,8 @@ export async function searchCocktailsByIngredient(ingredient: string) {
 export async function getRandomCocktail() {
     const url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
     const cocktail = await Axios.get(url);
-    return cocktail.data.drinks[0];
+    return cocktail.data.drinks.map((drink: DrinkDetails) => ({
+        ...drink, 
+        drinkIngredients: [drink.strIngredient1, drink.strIngredient2, drink.strIngredient3],
+    }));
 }
