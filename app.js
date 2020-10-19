@@ -8,11 +8,12 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/Menus', {useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 mongoose.set('useFindAndModify', false);
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
 
-    app.use( bodyParser.json() );       // to support JSON-encoded bodies
-    app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    app.use( bodyParser.json() );
+    app.use(bodyParser.urlencoded({
       extended: true
     }));
 
