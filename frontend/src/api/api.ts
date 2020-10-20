@@ -101,3 +101,26 @@ export async function getRandomCocktail() {
         instructions: drink.strInstructions,
     }));
 }
+
+
+export async function getCocktailById(idArg: string) {
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idArg}`;
+    const cocktails = await Axios.get(url);
+    const regex = /strIngredient/;
+    return cocktails.data.drinks.map((drink: DrinkDetails) => ({ 
+        id: drink.idDrink,
+        alcoholic: drink.strAlcoholic,
+        category: drink.strCategory,
+        name: drink.strDrink,
+        glass: drink.strGlass,
+        image_url: drink.strDrinkThumb,
+        drinkIngredients: Object.keys(drink).filter((key: string) => regex.test(key) ? true : false).map((key: string) => drink[key]).filter((value) => value ? true : false),
+        instructions: drink.strInstructions,
+    }));
+
+}
+
+export async function getMenuData() {
+    const menus = await Axios('/menus');
+    return menus;
+}

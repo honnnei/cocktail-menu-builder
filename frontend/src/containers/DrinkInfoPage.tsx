@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getRandomCocktail, Cocktail, DrinkDetails, DrinkDetailsEdited } from '../api/API';
 import DrinkInfo from '../components/DrinkInfo';
 import { RouteComponentProps } from "react-router-dom";
+import { getCocktailById } from '../api/API';
 
 
 const DrinkInfoPage: React.FunctionComponent<any> = (props) => {
-  const yourStateProp = props.match.params.drinkId;
-  console.log(yourStateProp);
-//   const [ searchResults, setSearchResults] = useState<DrinkDetails[]>([]);
+  // const yourStateProp = props.match.params.drinkId;
+  // console.log(yourStateProp);
+  const [ searchResults, setSearchResults] = useState<DrinkDetails[]>([]);
 
-// console.log(searchResults);
+  const getCocktailData = async () => {
+    const cocktails = await getCocktailById(props.match.params.drinkId);
+    setSearchResults(cocktails);
+  }
 
-// const handleOnClick = async (e: React.FormEvent<HTMLButtonElement>) => {
-//   e.preventDefault();
-//   const cocktail = await getRandomCocktail();
-//   setSearchResults(cocktail);
+  useEffect(() => {
+    getCocktailData();
+  }, []);
 
-// }
 
   return (
     <div className="random">
-        {/* <button className="btn btn-outline-info" onClick={handleOnClick}>Get Random Drink</button>
         { searchResults ? searchResults.map((drink, index) => (
           <DrinkInfo 
           id={drink.id} 
@@ -32,7 +33,7 @@ const DrinkInfoPage: React.FunctionComponent<any> = (props) => {
           instructions={drink.instructions} 
           drinkIngredients={drink.drinkIngredients}
           />
-        )) : ""} */}
+        )) : ""}
         <h1>Cocktail Info</h1>
     </div>
   );

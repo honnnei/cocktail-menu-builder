@@ -1,4 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { DrinkDetailsEdited, getMenuData } from '../api/API';
+import Axios from 'axios';
+
+type Menu = {
+  menuname: string,
+  drinks: DrinkDetailsEdited[];
+  _id: string,
+  __v: number
+}
 
 type Props = {
   id: string,
@@ -21,6 +30,22 @@ const DrinkInfo: React.FC<Props> = ({
   instructions, 
   drinkIngredients
 }) => {
+
+  // const [ menus, setMenus ] = useState<any[]>([]);
+  const getMenus = async () => {
+    const menus = await getMenuData();
+    return menus;
+  }
+  
+
+  console.log(getMenus());
+
+  useEffect(() => {
+    // getMenuDate();
+    // return () => {
+    //   cleanup?
+    // };
+  }, []);
   
   return (
     <div className="">
@@ -37,6 +62,16 @@ const DrinkInfo: React.FC<Props> = ({
           <a href="#" className="card-link">Card link</a>
           <a href="#" className="card-link">Another link</a>
             <p>{glass}</p>
+            <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a className="dropdown-item" onClick={e => console.log(1)}>Action</a>
+                    <a className="dropdown-item" onClick={e => console.log(2)}>Another action</a>
+                    <a className="dropdown-item" onClick={e => console.log(3)}>Something else here</a>
+                </div>
+            </div>
         </div>
       </div>
     </div>

@@ -2,4 +2,4 @@ Tech Stack
 - Node JS
 - Express JS
 - MongoDB + Mongoose
-- cocktaildb API 
+- The Cocktaildb API https://www.thecocktaildb.com/

@@ -4,7 +4,7 @@ const Menu = require('../models/menu');
  
   router.get('/', function(req, res, next) {
     Menu.find()
-    .then((menus) => res.send(menus))
+    .then((menus) => res.json(menus))
     .catch(next);
   });
 
