@@ -17,7 +17,7 @@ const handleOnClick = async (e: React.FormEvent<HTMLButtonElement>) => {
 
   return (
     <div className="random">
-        <button onClick={handleOnClick}>Get Random Drink</button>
+        <button className="btn btn-outline-info" onClick={handleOnClick}>Get Random Drink</button>
         { searchResults ? searchResults.map((drink, index) => (
           <div>
           <p>{drink.idDrink}</p>

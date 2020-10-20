@@ -79,5 +79,4 @@ const Menu = require('../models/menu');
     .catch(next);
   });
 
-
 module.exports = router;
