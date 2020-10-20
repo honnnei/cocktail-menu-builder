@@ -23,12 +23,22 @@ const Drink: React.FC<Props> = ({
 }) => {
   
   return (
-    <div className="drink-card">
-      <p>{name}</p>
-      <img className="drink-image" src={image_url}/>
-      <ul>{drinkIngredients.map((ing, ind) => ing ? <li key={ind}>{ing}</li> : null)}</ul>
-      <p>{glass}</p>
-      <p>{instructions}</p>
+    <div className="">
+      <div className="card" style={{width: "18rem"}}>
+        <img src={image_url} className="card-img-top" alt={name} />
+        <div className="card-body">
+          <h5 className="card-title">{name}</h5>
+          <p className="card-text">{instructions}</p>
+        </div>
+        <ul className="list-group list-group-flush">
+        {drinkIngredients.map((ing, ind) => ing ? <li className="list-group-item" key={ind}>{ing}</li> : null)}
+        </ul>
+        <div className="card-body">
+          <a href="#" className="card-link">Card link</a>
+          <a href="#" className="card-link">Another link</a>
+            <p>{glass}</p>
+        </div>
+      </div>
     </div>
   );
 }
