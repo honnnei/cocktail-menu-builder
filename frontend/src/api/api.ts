@@ -6,7 +6,25 @@ export interface Cocktail {
     strDrinkThumb: string;
 }
 
+export type DrinkDetailsEdited = {
+    id: string,
+    alcoholic: string,
+    category: string,
+    name: string,
+    glass: string,
+    image_url: string,
+    instructions: string,
+    drinkIngredients: string[],
+}
+
 export type DrinkDetails = {
+    id: string,
+    alcoholic: string,
+    category: string,
+    name: string,
+    glass: string,
+    image_url: string,
+    instructions: string,
     dateModified: string,
     drinkIngredients: string[],
     idDrink: string,
@@ -71,8 +89,15 @@ export async function searchCocktailsByIngredient(ingredient: string) {
 export async function getRandomCocktail() {
     const url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
     const cocktail = await Axios.get(url);
-    return cocktail.data.drinks.map((drink: DrinkDetails) => ({
-        ...drink, 
-        drinkIngredients: [drink.strIngredient1, drink.strIngredient2, drink.strIngredient3],
+    const regex = /strIngredient/;
+    return cocktail.data.drinks.map((drink: DrinkDetails) => ({ 
+        id: drink.idDrink,
+        alcoholic: drink.strAlcoholic,
+        category: drink.strCategory,
+        name: drink.strDrink,
+        glass: drink.strGlass,
+        image_url: drink.strDrinkThumb,
+        drinkIngredients: Object.keys(drink).filter((key: string) => regex.test(key) ? true : false).map((key: string) => drink[key]).filter((value) => value ? true : false),
+        instructions: drink.strInstructions,
     }));
 }
