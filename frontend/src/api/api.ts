@@ -122,5 +122,5 @@ export async function getCocktailById(idArg: string) {
 
 export async function getMenuData() {
     const menus = await Axios('/menus');
-    return menus;
+    return menus.data;
 }
