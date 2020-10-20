@@ -5,6 +5,7 @@ import Search from '../containers/Search';
 import RandomDrink from '../containers/RandomDrink';
 import Menus from '../containers/Menus';
 import Navbar from '../components/Navbar';
+import DrinkInfoPage from '../containers/DrinkInfoPage';
 const Routes = () => {
   
     return (
@@ -21,6 +22,11 @@ const Routes = () => {
                       path='/search'
                       exact 
                       component={Search}
+                  />
+                  <Route
+                      path='/cocktails/:drinkId'
+                      exact
+                      render={(props) => <DrinkInfoPage {...props} />}
                   />
                   <Route 
                       path='/random'

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { searchCocktailsByIngredient, Cocktail } from '../api/API';
-import Drink from '../components/DrinkCard';
+import DrinkCard from '../components/DrinkCard';
 
 
 function Search() {
@@ -21,9 +21,9 @@ function Search() {
               <button onClick={handleOnClick}>Search</button>
           </form>
           <div className="search-results">
-          {/* { searchResults ? searchResults.map((cocktail, index) => (
-              <Drink key={index} id={cocktail.idDrink} description={cocktail.strDrink} image_url={cocktail.strDrinkThumb}/>
-          )) : ""} */}
+          { searchResults ? searchResults.map((cocktail, index) => (
+              <DrinkCard key={index} id={cocktail.idDrink} name={cocktail.strDrink} image_url={cocktail.strDrinkThumb}/>
+          )) : ""}
           </div>
     </div>
   );
