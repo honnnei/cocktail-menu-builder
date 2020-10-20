@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from '../containers/Home';
 import Search from '../containers/Search';
 import RandomDrink from '../containers/RandomDrink';
 import Menus from '../containers/Menus';
@@ -11,8 +12,13 @@ const Routes = () => {
             <Router>
             <Navbar />
               <Switch>
-                  <Route 
+                    <Route 
                       path='/'
+                      exact 
+                      component={Home}
+                    />
+                  <Route 
+                      path='/search'
                       exact 
                       component={Search}
                   />
