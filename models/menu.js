@@ -6,7 +6,7 @@ const MenuSchema = new mongoose.Schema({
         type: String,
         required: [true, "Menu name field is required"]
     },
-    drinksList: {
+    drinks: {
         type: Array
     }
 });
