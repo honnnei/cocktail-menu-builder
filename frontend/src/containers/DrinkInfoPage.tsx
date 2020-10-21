@@ -21,7 +21,7 @@ const DrinkInfoPage: React.FunctionComponent<any> = (props) => {
 
 
   return (
-    <div className="random">
+    <div className="container-fluid">
         { searchResults ? searchResults.map((drink, index) => (
           <DrinkInfo 
           id={drink.id} 
@@ -34,7 +34,6 @@ const DrinkInfoPage: React.FunctionComponent<any> = (props) => {
           drinkIngredients={drink.drinkIngredients}
           />
         )) : ""}
-        <h1>Cocktail Info</h1>
     </div>
   );
 }

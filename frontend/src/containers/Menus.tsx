@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from 'react';
-import Carousel from '../components/Carousel';
 import MenuForm from '../components/MenuForm';
 import MenuCard from '../components/MenuCard';
 import { DrinkDetailsEdited, getMenuData } from '../api/API';
@@ -23,10 +22,8 @@ function Menus() {
     }, []);
 
     return (
-        <div>
-            <h1>Menus</h1>
+        <div>S
             <MenuForm />
-            <Carousel />
             {menus ? menus.map((menu, index) => (
                 <MenuCard menuname={menu.menuname} drinks={menu.drinks} />
             )) : null}

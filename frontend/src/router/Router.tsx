@@ -6,11 +6,13 @@ import RandomDrink from '../containers/RandomDrink';
 import Menus from '../containers/Menus';
 import Navbar from '../components/Navbar';
 import DrinkInfoPage from '../containers/DrinkInfoPage';
+import Header from '../components/Header';
 const Routes = () => {
   
     return (
           <div className="Home">
             <Router>
+                <Header />
             <Navbar />
               <Switch>
                     <Route 
