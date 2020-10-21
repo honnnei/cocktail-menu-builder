@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DrinkDetailsEdited, getMenuData } from '../api/API';
 import Axios from 'axios';
 
-type Menu = {
+export type Menu = {
   drinks: DrinkDetailsEdited[];
   menuname: string
 }

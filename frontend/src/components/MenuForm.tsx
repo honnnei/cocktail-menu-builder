@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 
+type Alert = {
+    display: string;
+    message: string;
+}
+
 export default function MenuForm() {
     const [ menuname, setMenuname ] = useState<string>('');
-    const [ alertVisible, setAlertVisible ] = useState<string>("none");
+    const [ successAlertVisible, setSuccessAlertVisible ] = useState<Alert>({display: "none", message: ""});
+    const [ errorAlertVisible, setErrorAlertVisible ] = useState<Alert>({display: "none", message: ""});
     const createMenu = () => {
         Axios.post('/menus', { menuname: menuname})
         .then((res) => {
-           setAlertVisible("flex");
+           setSuccessAlertVisible({display: "flex", message: res.data.menuname});
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+            setErrorAlertVisible({display: "flex", message: err.message})
+            console.log(err);
+        });
     }
+
     return (
         <>
         <button type="button" className="btn btn-info" data-toggle="modal" data-target="#exampleModal">
@@ -42,7 +52,8 @@ export default function MenuForm() {
                     <small id="menuHelp" className="form-text text-muted">Please make it a single word</small>
                 </div>
                 </form>
-                <div style={{display: alertVisible}}className="alert alert-primary" role="alert">Menu Created</div>
+                <div style={{display: successAlertVisible.display}} className="alert alert-warning" role="alert">{successAlertVisible.message} Menu Created</div>
+                <div style={{display: errorAlertVisible.display}} className="alert alert-danger" role="alert">{errorAlertVisible.message}</div>
             </div>
             <div className="modal-footer">
                 <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>

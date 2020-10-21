@@ -13,10 +13,10 @@ const Menu = require('../models/menu');
     .then((result) => {
       if (!result) {
         Menu.create(req.body)
-        .then((menu) => res.send(menu))
+        .then((menu) => res.json(menu))
         .catch(next);
       } else {
-        throw("A menu with this name already exists");
+        throw({"error": "A menu with this name already exists"})
       }
     })
     .catch(next);
