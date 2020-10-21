@@ -1,10 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Menu } from './DrinkInfo';
 
 const MenuCard: React.FC<Menu> = ({
     menuname, 
     drinks
   }) => {
+
+    const [ comments, setComments ] = useState<string[]>([]);
+    const [ commentInput, setCommentInput ] = useState<string>('');
+
+    const createComment = () => {
+        let array = [...comments, commentInput];
+        setComments(array);
+    }
 
     return (
         <div className="card text-center">
@@ -27,6 +35,15 @@ const MenuCard: React.FC<Menu> = ({
             <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
             <a href="#" className="btn btn-primary">Go somewhere</a>
         </div>
+            <input 
+            type="text"
+            value={commentInput}
+            onChange={e => setCommentInput(e.target.value)}
+            />
+            <button onClick={createComment}>Create Comment</button>
+        {comments ? comments.map((comment) => (
+            <p>{comment}</p>
+        )) : ""}
         </div>
     )
 }
