@@ -4,34 +4,22 @@ import { useRouter } from '../utils/utils';
  
 
 const Navbar = () => {
-    // const location = useLocation();
-    // console.log(location.pathname);
     const router = useRouter();
-    console.log(router.pathname)
-
-    // const [ location, setLocation ] = useState<any>(useLocation());
-
-    // useEffect(() => {
-    //     const currentLocation = useLocation();
-    //     setLocation(currentLocation);
-    // }, [useLocation()]);
-    // console.log(location.pathname);
 
     return (
         <nav >
-            {/* className="navbar navbar-expand-lg navbar-light bg-light" */}
-            <ul className="nav nav-pills nav-fill">
-            <li className="nav-item">
-                    <Link className="navbar-brand" to="/">Cocktail Menu Builder</Link>
+            <ul className="nav ">
+                <li className="nav-item col-3">
+                    <Link className={router.pathname === "/" ? "nav-link btn btn-outline-dark active" : "nav-link btn btn-outline-dark"} to="/">Cocktail Menu Builder</Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link active btn btn-outline-info" to="/search">Search</Link>
+                <li className="nav-item col-3">
+                    <Link className={router.pathname === "/search" ? "nav-link btn btn-outline-info active" : "nav-link btn btn-outline-info"} to="/search">Search</Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link btn btn-outline-danger" to="random">Random Drink</Link>
+                <li className="nav-item col-3">
+                    <Link className={router.pathname === "/random" ? "nav-link btn btn-outline-danger active" : "nav-link btn btn-outline-danger"} to="/random">Random Drink</Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link btn btn-outline-warning" to="menus">Menus</Link>
+                <li className="nav-item col-3">
+                    <Link className={router.pathname === "/menus" ? "nav-link btn btn-outline-warning active" : "nav-link btn btn-outline-warning"} to="/menus">Menus</Link>
                 </li>
             </ul>
         </nav>
