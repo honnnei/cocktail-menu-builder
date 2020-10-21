@@ -1,7 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
+import { Link, useLocation  } from 'react-router-dom';
+import { useRouter } from '../utils/utils';
+ 
 
 const Navbar = () => {
+    // const location = useLocation();
+    // console.log(location.pathname);
+    const router = useRouter();
+    console.log(router.pathname)
+
+    // const [ location, setLocation ] = useState<any>(useLocation());
+
+    // useEffect(() => {
+    //     const currentLocation = useLocation();
+    //     setLocation(currentLocation);
+    // }, [useLocation()]);
+    // console.log(location.pathname);
+
     return (
         <nav >
             {/* className="navbar navbar-expand-lg navbar-light bg-light" */}
