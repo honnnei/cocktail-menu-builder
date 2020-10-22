@@ -24,20 +24,6 @@ function Search() {
     setSearchResults(cocktails);
   } 
 
-
-  const handleBySpirit = async (ingredient: string) => {
-    const cocktails = await searchCocktailsByIngredient(ingredient);
-    setSearchResults(cocktails);
-
-  }
-
-  const handleByGlass = async (glass: string) => {
-    // e.preventDefault();
-    // e: React.FormEvent<HTMLButtonElement>, 
-    const cocktails = await filterByGlass(glass);
-    setSearchResults(cocktails);
-
-  }
   const [ menus, setMenus ] = useState<Menu[]>([]);
 
   const getMenus = async() => {
@@ -98,10 +84,10 @@ function Search() {
                 </a>
             </li>
           </ul>
-          {/* <form className="form-inline my-2 my-lg-0">
+          <div className="form-inline my-2 my-lg-0">
             <input className="form-control mr-sm-2" type="text" value={ingredient} onChange={e => setIngredient(e.target.value)} placeholder="Type Ingredient Here" aria-label="Search" />
-            <button className="btn btn-danger my-2 my-sm-0" onClick={handleOnClick} type="submit">Search</button>
-          </form> */}
+            <button className="btn btn-danger my-2 my-sm-0" onClick={e => getCocktailsByApiCall(searchCocktailsByIngredient, ingredient)} type="submit">Search</button>
+          </div>
         </div>
       </nav>
       {/* end */}
