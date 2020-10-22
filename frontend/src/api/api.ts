@@ -120,6 +120,12 @@ export async function getCocktailById(idArg: string) {
 
 }
 
+export async function filterByGlass(glass: string) {
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=${glass}`;
+    const cocktails = await Axios.get(url);
+    return cocktails.data.drinks.map((cocktail: Cocktail, index: number) => cocktail);
+}
+
 export async function getMenuData() {
     const menus = await Axios('/menus');
     return menus.data;

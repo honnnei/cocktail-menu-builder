@@ -11,7 +11,7 @@ const Navbar = () => {
         <nav className="bg-light"style={{display: "block"}}>
             <ul className="nav">
                 <li className="nav-item col-3">
-                    <Link className={router.pathname === "/" ? "nav-link btn btn-outline-dark active" : "nav-link btn btn-outline-dark"} to="/">Cocktail Menu Builder</Link>
+                    <Link className={router.pathname === "/" ? "nav-link btn btn-outline-dark active" : "nav-link btn btn-outline-dark"} to="/">About</Link>
                 </li>
                 <li className="nav-item col-3">
                     <Link className={router.pathname === "/search" ? "nav-link btn btn-outline-info active" : "nav-link btn btn-outline-info"} to="/search">Search</Link>
