@@ -7,8 +7,9 @@ const Navbar = () => {
     const router = useRouter();
 
     return (
-        <nav >
-            <ul className="nav ">
+        <div className="navbar-c-container">
+        <nav className="bg-light"style={{display: "block"}}>
+            <ul className="nav">
                 <li className="nav-item col-3">
                     <Link className={router.pathname === "/" ? "nav-link btn btn-outline-dark active" : "nav-link btn btn-outline-dark"} to="/">Cocktail Menu Builder</Link>
                 </li>
@@ -23,6 +24,7 @@ const Navbar = () => {
                 </li>
             </ul>
         </nav>
+        </div>
     );
 }
 

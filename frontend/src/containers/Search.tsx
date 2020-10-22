@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
-import { searchCocktailsByIngredient, Cocktail } from '../api/API';
+import React, { useState, useEffect } from 'react';
+import { searchCocktailsByIngredient, Cocktail, DrinkDetailsEdited, getMenuData } from '../api/API';
 import DrinkCard from '../components/DrinkCard';
+import { Menu } from '../components/DrinkInfo';
+import Axios from 'axios';
+import Nav2 from '../components/Nav2';
+import SearchText from '../components/SearchText';
 
 
 function Search() {
@@ -14,33 +18,51 @@ function Search() {
     setSearchResults(cocktails);
 
   }
+  const [ menus, setMenus ] = useState<Menu[]>([]);
+
+  const getMenus = async() => {
+    const menus = await getMenuData();
+    setMenus(menus);
+  }
+
+  // const addToMenu = (menuname) => {
+
+  // }
+  
+  useEffect(() => {
+    getMenus();
+    // return () => {
+    //   cleanup?
+    // };
+  }, []);
+
+
   return (
     <div className="Search">
+      {/* <SearchText /> */}
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li className="nav-item">
+            <a className="btn btn-light dropdown-toggle" data-toggle="collapse" href="#cocktailsBySpirits" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Popular Spirits
+                </a>
+            </li>
+            <li className="nav-item">
+            <a className="btn btn-light dropdown-toggle" data-toggle="collapse" href="#cocktailsByGlasses" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Type of Glass
+                </a>
+            </li>
+          </ul>
+          <form className="form-inline my-2 my-lg-0">
+            <input className="form-control mr-sm-2" type="text" value={ingredient} onChange={e => setIngredient(e.target.value)} placeholder="Type Ingredient Here" aria-label="Search" />
+            <button className="btn btn-danger my-2 my-sm-0" onClick={handleOnClick} type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+      {/* end */}
           <section>
-          <ul className="nav">
-                <li className="nav-item col-6">
-                <div className="form-group">
-                  <div className="form-row">
-                    <div className="col">
-                      <input type="text" className="form-control" value={ingredient} onChange={e => setIngredient(e.target.value)} id="ingredientSearch" placeholder="Type Ingredient Here, e.g. gin" />
-                    </div>
-                    <div className="col">
-                      <button className="btn btn-dark" onClick={handleOnClick}>Search By Ingredient</button>
-                    </div>
-                  </div>
-                </div>
-                </li>
-                <li className="nav-item col-3">
-                <a className="btn btn-dark dropdown-toggle" data-toggle="collapse" href="#cocktailsBySpirits" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  Search by Popular Spirits
-                </a>
-                </li>
-                <li className="nav-item col-3">
-                <a className="btn btn-dark dropdown-toggle" data-toggle="collapse" href="#cocktailsByGlasses" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    Search by the Type of Glass
-                </a>
-                </li>
-        </ul>
+        
         <div className="collapse" id="cocktailsBySpirits">
           <div className="card card-body bg-light">
           <ul className="nav">
@@ -99,7 +121,7 @@ function Search() {
              
           <div className="search-results">
           { searchResults ? searchResults.map((cocktail, index) => (
-              <DrinkCard key={index} id={cocktail.idDrink} name={cocktail.strDrink} image_url={cocktail.strDrinkThumb}/>
+              <DrinkCard key={index} id={cocktail.idDrink} name={cocktail.strDrink} image_url={cocktail.strDrinkThumb} currentMenus={menus}/>
           )) : ""}
           </div>
     </div>

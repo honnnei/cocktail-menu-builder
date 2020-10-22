@@ -36,8 +36,6 @@ const DrinkInfo: React.FC<Props> = ({
     setMenus(menus);
   }
 
-  console.log(menus);
-
   // const addToMenu = (menuname) => {
 
   // }
