@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getRandomCocktail, Cocktail, DrinkDetails, DrinkDetailsEdited } from '../api/API';
+import { getRandomCocktail, Cocktail, DrinkDetails, DrinkDetailsEdited } from '../api/cocktail_api';
 import DrinkInfo from '../components/DrinkInfo';
 import { RouteComponentProps } from "react-router-dom";
-import { getCocktailById } from '../api/API';
+import { getCocktailById } from '../api/cocktail_api';
 
 
 const DrinkInfoPage: React.FunctionComponent<any> = (props) => {

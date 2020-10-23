@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { DrinkDetailsEdited, getMenuData } from '../api/API';
+import { DrinkDetailsEdited, getMenuData } from '../api/cocktail_api';
 import { Menu } from './DrinkInfo';
 import Axios from 'axios';
 

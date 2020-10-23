@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { searchCocktailsByIngredient, Cocktail, DrinkDetailsEdited, getMenuData, filterByGlass } from '../api/API';
+import { searchCocktailsByIngredient, Cocktail, DrinkDetailsEdited, getMenuData, filterByGlass } from '../api/cocktail_api';
 import DrinkCard from '../components/DrinkCard';
 import { Menu } from '../components/DrinkInfo';
 import Axios from 'axios';

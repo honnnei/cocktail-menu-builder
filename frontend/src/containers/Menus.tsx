@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import MenuForm from '../components/MenuForm';
 import MenuCard from '../components/MenuCard';
-import { DrinkDetailsEdited, getMenuData } from '../api/API';
+import { DrinkDetailsEdited, getMenuData } from '../api/cocktail_api';
 
 type Menu = {
     drinks: DrinkDetailsEdited[];

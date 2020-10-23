@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getRandomCocktail, Cocktail, DrinkDetails, DrinkDetailsEdited } from '../api/API';
+import { getRandomCocktail, Cocktail, DrinkDetails, DrinkDetailsEdited } from '../api/cocktail_api';
 import DrinkInfo from '../components/DrinkInfo';
 
 

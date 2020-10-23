@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DrinkDetailsEdited, getMenuData } from '../api/API';
+import { DrinkDetailsEdited, getMenuData } from '../api/cocktail_api';
 import Axios from 'axios';
 
 export type Menu = {
