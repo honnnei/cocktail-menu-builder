@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 
-type Alert = {
+interface Alert {
     display: string;
     message: string;
 }
 
-export default function MenuForm() {
+const MenuForm: React.FC<{getMenusAgain: () => any}> = ({
+    getMenusAgain
+  }) => {
     const [ menuname, setMenuname ] = useState<string>('');
     const [ successAlertVisible, setSuccessAlertVisible ] = useState<Alert>({display: "none", message: ""});
     const [ errorAlertVisible, setErrorAlertVisible ] = useState<Alert>({display: "none", message: ""});
+    
     const createMenu = () => {
         Axios.post('/menus', { menuname: menuname})
         .then((res) => {
            setSuccessAlertVisible({display: "flex", message: res.data.menuname});
+           getMenusAgain();
         })
         .catch((err) => {
             setErrorAlertVisible({display: "flex", message: err.message})
@@ -49,7 +53,6 @@ export default function MenuForm() {
                     value={menuname}
                     onChange={e => setMenuname(e.target.value)}
                     />
-                    <small id="menuHelp" className="form-text text-muted">Please make it a single word</small>
                 </div>
                 </form>
                 <div style={{display: successAlertVisible.display}} className="alert alert-warning" role="alert">{successAlertVisible.message} Menu Created</div>
@@ -65,3 +68,5 @@ export default function MenuForm() {
         </>
     )
 }
+
+export default MenuForm;

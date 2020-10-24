@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { DrinkDetailsEdited, getMenuData } from '../api/cocktail_api';
-import { Menu } from './DrinkInfo';
+import { Menu } from '../types/types';
 import Axios from 'axios';
 
     type Props = {
@@ -17,6 +16,17 @@ import Axios from 'axios';
     image_url, 
     currentMenus
     }) => {
+
+        const addToMenu = async (menunameArg: string) => {
+            try {
+                const addDrink = await Axios.put(`/menus/drinks/add/${menunameArg}`, {id: id, name: name, image_url});
+                console.log(addDrink);
+            }
+            catch {
+                
+            }
+            
+        }
 
         
     
@@ -34,7 +44,7 @@ import Axios from 'axios';
                         </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {currentMenus ? currentMenus.map((menu) => (
-                            <a className="dropdown-item" onClick={e => console.log(menu.menuname)}>{menu.menuname}</a>
+                            <button className="dropdown-item" onClick={e => addToMenu(menu.menuname)}>{menu.menuname}</button>
                             )) : ""}
                         </div>
                     </div>

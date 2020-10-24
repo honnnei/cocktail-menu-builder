@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { searchCocktailsByIngredient, Cocktail, DrinkDetailsEdited, getMenuData, filterByGlass } from '../api/cocktail_api';
+import { searchCocktailsByIngredient, filterByGlass } from '../api/cocktail_api';
+import { getMenus } from '../api/menu_api';
+import { Cocktail, Menu } from '../types/types';
 import DrinkCard from '../components/DrinkCard';
-import { Menu } from '../components/DrinkInfo';
 import Axios from 'axios';
-import Nav2 from '../components/Nav2';
-import SearchText from '../components/SearchText';
 
 
 function Search() {
 
     const [ ingredient, setIngredient ] = useState<string>('');
     const [ searchResults, setSearchResults] = useState<Cocktail[]>();
-
-  // const handleOnClick = async (e: React.FormEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   const cocktails = await searchCocktailsByIngredient(ingredient);
-  //   setSearchResults(cocktails);
-
-  // }
-
+    
   const getCocktailsByApiCall = async (apiCall: (arg: string) => any, argument: string) => {
     const cocktails = await apiCall(argument);
     setSearchResults(cocktails);
@@ -26,8 +18,8 @@ function Search() {
 
   const [ menus, setMenus ] = useState<Menu[]>([]);
 
-  const getMenus = async() => {
-    const menus = await getMenuData();
+  const callGetMenus = async() => {
+    const menus = await getMenus();
     setMenus(menus);
   }
 
@@ -36,7 +28,7 @@ function Search() {
   // }
   
   useEffect(() => {
-    getMenus();
+    callGetMenus();
     // return () => {
     //   cleanup?
     // };

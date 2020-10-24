@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { DrinkDetailsEdited, getMenuData } from '../api/cocktail_api';
+import { getMenus } from '../api/menu_api';
 import Axios from 'axios';
-
-export type Menu = {
-  drinks: DrinkDetailsEdited[];
-  menuname: string
-}
+import { Menu } from '../types/types';
 
 type Props = {
   id: string,
@@ -31,8 +27,8 @@ const DrinkInfo: React.FC<Props> = ({
 
   const [ menus, setMenus ] = useState<Menu[]>([]);
 
-  const getMenus = async() => {
-    const menus = await getMenuData();
+  const getMenusData = async() => {
+    const menus = await getMenus();
     setMenus(menus);
   }
 
@@ -41,7 +37,7 @@ const DrinkInfo: React.FC<Props> = ({
   // }
   
   useEffect(() => {
-    getMenus();
+    getMenusData();
     // return () => {
     //   cleanup?
     // };

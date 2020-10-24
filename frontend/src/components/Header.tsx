@@ -24,7 +24,7 @@ export default function Header() {
             <div className="container">
                 <h1 className="display-3">
                     {"Cocktail Menu Builder".split("").map((letter, index) => (
-                        <span className={colorArray[colorIndex(colorArray, index)]}>{letter}
+                        <span className={colorArray[colorIndex(colorArray, index)]} key={index}>{letter}
                     </span>
                 ))}
                 </h1>

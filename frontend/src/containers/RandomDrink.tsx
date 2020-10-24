@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import { getRandomCocktail, Cocktail, DrinkDetails, DrinkDetailsEdited } from '../api/cocktail_api';
+import { getRandomCocktail } from '../api/cocktail_api';
 import DrinkInfo from '../components/DrinkInfo';
+import { DrinkDetails } from '../types/types';
 
 
 function RandomDrink() {
 
   const [ searchResults, setSearchResults] = useState<DrinkDetails[]>([]);
 
-console.log(searchResults);
-
-const handleOnClick = async (e: React.FormEvent<HTMLButtonElement>) => {
-  e.preventDefault();
-  const cocktail = await getRandomCocktail();
-  setSearchResults(cocktail);
-
-}
+  const handleOnClick = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const cocktail = await getRandomCocktail();
+    setSearchResults(cocktail);
+  }
 
   return (
     <div className="random">
         <button className="btn btn-outline-info" onClick={handleOnClick}>Get Random Drink</button>
-        { searchResults ? searchResults.map((drink, index) => (
+        { searchResults ? searchResults.map((drink) => (
           <DrinkInfo 
           id={drink.id} 
           alcoholic={drink.alcoholic} 

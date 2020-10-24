@@ -4,17 +4,6 @@ export interface Cocktail {
     strDrinkThumb: string;
 }
 
-export interface DrinkDetailsEdited {
-    id: string,
-    alcoholic: string,
-    category: string,
-    name: string,
-    glass: string,
-    image_url: string,
-    instructions: string,
-    drinkIngredients: string[],
-}
-
 export interface DrinkDetails {
     id: string,
     alcoholic: string,
@@ -77,3 +66,19 @@ export interface DrinkDetails {
     strTags: string,
     strVideo: string,
 }
+
+export interface DrinkDetailsEdited {
+    id: string,
+    alcoholic: string,
+    category: string,
+    name: string,
+    glass: string,
+    image_url: string,
+    instructions: string,
+    drinkIngredients: string[],
+}
+
+export type Menu = {
+    drinks: DrinkDetailsEdited[];
+    menuname: string
+  }

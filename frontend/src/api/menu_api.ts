@@ -1,8 +1,8 @@
 import Axios from 'axios';
 
 export async function getMenus() {
-    // const menus = await Axios('/menus');
-    // return menus.data;
+    const menus = await Axios('/menus');
+    return menus.data;
 }
 
 export async function getSingleMenu() {
