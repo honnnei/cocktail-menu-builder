@@ -42,9 +42,6 @@ const MenuCard: React.FC<MenuC> = ({
     }
 
     const deleteDrink = async (menu: string, drinkIndex: number) => {
-        const deleted = window.confirm("Do you want to delete this drink?");
-
-        if (deleted) {
             try {
                 const drink = await Axios.put(`/menus/drinks/delete/${menu}/${drinkIndex}`);
                 console.log(drink);
@@ -52,11 +49,10 @@ const MenuCard: React.FC<MenuC> = ({
             } catch (error) {
             console.log(error);
             }
-        }
     }
 
     return (
-        <div className="card" style={{width: '18rem'}}>
+        <div className="card" style={{width: '30rem'}}>
             <img src={drinks[0] ? drinks[0].image_url : 'https://image.flaticon.com/icons/svg/165/165979.svg'} className="card-img-top" alt={'picture of a cocktail'} />
             <div className="card-body">
                 <h5 className="card-title">{menuname}</h5>
@@ -64,17 +60,16 @@ const MenuCard: React.FC<MenuC> = ({
             </div>
             <ul className="list-group list-group-flush">
             {drinks ? drinks.map((drink: any, index:number) => (
-                <li className="list-group-item" onMouseEnter={e => handleMouseEnter(index)} onMouseLeave={e => handleMouseLeave(index)}>
+                <li className="list-group-item">
                     <Link to={`/cocktails/${drink.id}`} className="card-link text-dark">
                         {drink.name}
                     </Link>
-                    <button onClick={e => deleteDrink(menuname, index)} type="button" className="close" aria-label="Delete">
+                    <button onClick={e => deleteDrink(menuname, index)} type="button" className="close" aria-label="Delete" onMouseEnter={e => handleMouseEnter(index)} onMouseLeave={e => handleMouseLeave(index)}>
                         <span aria-hidden="true">&times;</span>
+                        {/* <p style={currentDrinkIndex === index ? {display: "flex"} : {display: "none"}} z-index={2}>This will delete this drink off this menu.</p> */}
                     </button>
-                    <div 
-                    style={currentDrinkIndex === index ? {display: "flex"} : {display: "none"}}
-                    >
-                        <p className="text-danger">{drink.drinkIngredients?.map((d: string) => `${d} ` )}</p>
+                    <div>
+                        <p className="text-danger text-capitalize">{drink.drinkIngredients?.map((d: string) => `${d} ` )}</p>
                     </div>
                 </li>
             )) : null }

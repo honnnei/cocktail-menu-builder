@@ -19,8 +19,10 @@ function Menus() {
     }, []);
 
     return (
-        <div>
-            <MenuForm getMenusAgain={callGetMenus}/>
+        <div className="menus-page-container">
+            <div>
+                <MenuForm getMenusAgain={callGetMenus}/>
+            </div>
             <div className="menus-container">
             {menus ? menus.map((menu) => (
                 <MenuCard menuname={menu.menuname} drinks={menu.drinks} getMenusAgain={callGetMenus}/>
