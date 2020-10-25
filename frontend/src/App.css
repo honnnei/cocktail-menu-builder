@@ -106,3 +106,15 @@
   align-items: flex-start;
   padding: 2em;
 }
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  width: 600px;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
