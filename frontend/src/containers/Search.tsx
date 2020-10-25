@@ -15,11 +15,12 @@ function Search() {
     if (byIngreiendtOrName) {
       const cocktailsIngredient = await apiCall(argument);
       console.log('ing or name')
-      if (cocktailsIngredient) {
+      if (typeof(cocktailsIngredient) !== 'string') {
         console.log(`this is cocktailsingredeints`);
         console.log(cocktailsIngredient);
         setSearchResults(cocktailsIngredient);
       } else {
+        console.log(cocktailsIngredient)
         const cocktailsName = await searchCocktailByName(argument)
         setSearchResults(cocktailsName);
       }
