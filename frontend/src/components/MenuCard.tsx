@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DrinkDetailsEdited, Menu } from '../types/types';
+import { Link } from 'react-router-dom';
 import Axios from 'axios';
 
 interface MenuC {
@@ -14,13 +15,6 @@ const MenuCard: React.FC<MenuC> = ({
     getMenusAgain
   }) => {
 
-    const [ comments, setComments ] = useState<string[]>([]);
-    const [ commentInput, setCommentInput ] = useState<string>('');
-
-    const createComment = () => {
-        let array = [...comments, commentInput];
-        setComments(array);
-    }
 
     const deleteMenu = async (menunameArg: string) => {
 
@@ -31,8 +25,22 @@ const MenuCard: React.FC<MenuC> = ({
                 const deletedMenu = await Axios.delete(`/menus/${menunameArg}`);
                 getMenusAgain();
             }
-            catch {
-    
+            catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
+    const deleteDrink = async (menu: string, drinkIndex: number) => {
+        const deleted = window.confirm("Do you want to delete this drink?");
+
+        if (deleted) {
+            try {
+                const drink = await Axios.put(`/menus/drinks/delete/${menu}/${drinkIndex}`);
+                console.log(drink);
+                getMenusAgain();
+            } catch (error) {
+            console.log(error);
             }
         }
     }
@@ -45,7 +53,11 @@ const MenuCard: React.FC<MenuC> = ({
                 <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <ul className="list-group list-group-flush">
-            {drinks ? drinks.map((drink: any) => <li className="list-group-item">{drink.name}</li>) : null }
+            {drinks ? drinks.map((drink: any, index:number) => (
+            <li className="list-group-item"><Link to={`/cocktails/${drink.id}`} className="card-link text-dark">{drink.name}</Link><button onClick={e => deleteDrink(menuname, index)} type="button" className="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button></li>
+            )) : null }
             </ul>
             <div className="card-body">
                 <button className="btn btn-outline-dark" onClick={e => deleteMenu(menuname)}>Delete Menu</button>

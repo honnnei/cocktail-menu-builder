@@ -22,8 +22,8 @@ import Axios from 'axios';
                 const addDrink = await Axios.put(`/menus/drinks/add/${menunameArg}`, {id: id, name: name, image_url});
                 console.log(addDrink);
             }
-            catch {
-                
+            catch (error) {
+                console.log(error);
             }
             
         }

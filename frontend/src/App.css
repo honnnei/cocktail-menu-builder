@@ -80,3 +80,21 @@
   margin: 1em;
 
 }
+
+.random-button {
+  margin: 2em;
+}
+
+.random-container {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menus-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

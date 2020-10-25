@@ -19,7 +19,7 @@ const DrinkInfoPage: React.FunctionComponent<any> = (props) => {
 
   return (
     <div className="container-fluid">
-        { searchResults ? searchResults.map((drink, index) => (
+        { searchResults ? searchResults.map((drink) => (
           <DrinkInfo 
           id={drink.id} 
           alcoholic={drink.alcoholic} 

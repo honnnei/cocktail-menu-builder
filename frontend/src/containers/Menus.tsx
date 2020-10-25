@@ -21,9 +21,11 @@ function Menus() {
     return (
         <div>
             <MenuForm getMenusAgain={callGetMenus}/>
+            <div className="menus-container">
             {menus ? menus.map((menu) => (
                 <MenuCard menuname={menu.menuname} drinks={menu.drinks} getMenusAgain={callGetMenus}/>
             )) : null}
+            </div>
         </div>
     );
 }
