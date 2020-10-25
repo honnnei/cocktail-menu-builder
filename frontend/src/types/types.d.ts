@@ -1,13 +1,16 @@
-export interface CocktailOriginal {
-    idDrink: string;
-    strDrink: string;
-    strDrinkThumb: string;
+export interface Alert {
+    display: string;
+    message: string;
 }
-
 export interface Cocktail {
     id: string;
     name: string;
     image_url: string;
+}
+export interface CocktailOriginal {
+    idDrink: string;
+    strDrink: string;
+    strDrinkThumb: string;
 }
 
 export interface DrinkDetails {

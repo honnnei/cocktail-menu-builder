@@ -1,34 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { searchCocktailsByIngredient, filterByGlass, searchCocktailByName } from '../api/cocktail_api';
 import { getMenus } from '../api/menu_api';
-import { Cocktail, Menu } from '../types/types';
+import { Cocktail, Menu, Alert } from '../types/types';
 import DrinkCard from '../components/DrinkCard';
 import Axios from 'axios';
 
 
 function Search() {
 
-    const [ ingredient, setIngredient ] = useState<string>('');
+    const [ input, setInput ] = useState<string>('');
     const [ searchResults, setSearchResults] = useState<Cocktail[]>();
+    const [ errorAlertVisible, setErrorAlertVisible ] = useState<Alert>({display: "none", message: ""});
     
-  const getCocktailsByApiCall = async (apiCall: (arg: string) => any, argument: string, byIngreiendtOrName: boolean) => {
-    if (byIngreiendtOrName) {
-      const cocktailsIngredient = await apiCall(argument);
-      console.log('ing or name')
-      if (typeof(cocktailsIngredient) !== 'string') {
-        console.log(`this is cocktailsingredeints`);
-        console.log(cocktailsIngredient);
-        setSearchResults(cocktailsIngredient);
-      } else {
-        console.log(cocktailsIngredient)
-        const cocktailsName = await searchCocktailByName(argument)
-        setSearchResults(cocktailsName);
-      }
-    } else {
+  const getCocktailsByApiCall = async (apiCall: (arg: string) => any, argument: string) => {
       const cocktails = await apiCall(argument);
-      setSearchResults(cocktails);
+      if (typeof(cocktails) === 'string') {
+        setErrorAlertVisible({display: "flex", message: cocktails});
+      } else {
+        setErrorAlertVisible({display: "none", message: ''});
+        setSearchResults(cocktails);
+
+      }
     }
-  } 
+      
 
   const [ menus, setMenus ] = useState<Menu[]>([]);
 
@@ -90,14 +84,10 @@ function Search() {
                 </a>
             </li>
           </ul>
-          <div><p>Search Cocktail by Name or Ingredient:</p></div>
-          {/* <div className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="text" value={ingredient} onChange={e => setIngredient(e.target.value)} placeholder="Type Cocktail Name" aria-label="Search" />
-            <button className="btn btn-danger my-2 my-sm-0" onClick={e => getCocktailsByApiCall(searchCocktailsByIngredient, ingredient)} type="submit">Search</button>
-          </div> */}
           <div className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="text" value={ingredient} onChange={e => setIngredient(e.target.value)} placeholder="Type Ingredient Here" aria-label="Search" />
-            <button className="btn btn-danger my-2 my-sm-0" onClick={e => getCocktailsByApiCall(searchCocktailsByIngredient, ingredient, true)} type="submit">Search</button>
+            <input className="form-control mr-sm-2" type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="Name or Ingredient" aria-label="Search" />
+            <button className="btn btn-danger my-2 my-sm-0" onClick={e => getCocktailsByApiCall(searchCocktailsByIngredient, input)} type="submit">By Ingriedient</button>
+            <button className="btn btn-danger my-2 my-sm-0" onClick={e => getCocktailsByApiCall(searchCocktailByName, input)} type="submit">By Name</button>
           </div>
         </div>
       </nav>
@@ -107,9 +97,9 @@ function Search() {
         <div className="collapse" id="cocktailsBySpirits">
           <div className="card card-body bg-light">
           <ul className="nav">
-            {spiritsArray.map((spirit) => (
-              <li className="nav-item col-2">
-              <a className="nav-link btn btn-outline-dark" onClick={e => getCocktailsByApiCall(searchCocktailsByIngredient, spirit, false)}>{capitalizeString(spirit)}</a>
+            {spiritsArray.map((spirit, index) => (
+              <li className="nav-item col-2" key={index}>
+              <a className="nav-link btn btn-outline-dark" onClick={e => getCocktailsByApiCall(searchCocktailsByIngredient, spirit)}>{capitalizeString(spirit)}</a>
           </li>
             ))}
                 
@@ -119,18 +109,16 @@ function Search() {
         <div className="collapse" id="cocktailsByGlasses">
           <div className="card card-body">
           <ul className="nav">
-          {glassArray.map((glass) => (
-      <li className="nav-item col-2">
-          <a className="nav-link btn btn-outline-dark" onClick={e => getCocktailsByApiCall(filterByGlass, glass, false)}>{capitalizeString(glass === "Old-fashioned glass" ? "Old-fashioned" : glass)}</a>
-      </li>
-    ))}
-            
-  
-            </ul>
+            {glassArray.map((glass, index) => (
+              <li className="nav-item col-2" key={index}>
+                  <a className="nav-link btn btn-outline-dark" onClick={e => getCocktailsByApiCall(filterByGlass, glass)}>{capitalizeString(glass === "Old-fashioned glass" ? "Old-fashioned" : glass)}</a>
+              </li>
+            ))}
+          </ul>
           </div>
         </div>
           </section>
-             
+          <div style={{display: errorAlertVisible.display}} className="alert alert-danger" role="alert">{errorAlertVisible.message}</div>
           <div className="search-results">
           { searchResults ? searchResults.map((cocktail, index) => (
               <DrinkCard key={index} id={cocktail.id} name={cocktail.name} image_url={cocktail.image_url} currentMenus={menus}/>

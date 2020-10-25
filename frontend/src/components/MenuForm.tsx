@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-
-interface Alert {
-    display: string;
-    message: string;
-}
+import { Alert } from '../types/types';
 
 const MenuForm: React.FC<{getMenusAgain: () => any}> = ({
     getMenusAgain
