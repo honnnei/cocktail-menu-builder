@@ -12,8 +12,9 @@ const Routes = () => {
     return (
           <div className="Home">
             <Router>
-                <Header />
+                
             <Navbar />
+            <Header />
               <Switch>
                     <Route 
                       path='/'

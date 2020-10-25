@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { DrinkDetailsEdited, getMenuData } from '../api/API';
+import { getMenus } from '../api/menu_api';
+import { getCocktailById } from '../api/cocktail_api';
 import Axios from 'axios';
-
-export type Menu = {
-  drinks: DrinkDetailsEdited[];
-  menuname: string
-}
+import { Menu } from '../types/types';
 
 type Props = {
   id: string,
@@ -31,19 +28,32 @@ const DrinkInfo: React.FC<Props> = ({
 
   const [ menus, setMenus ] = useState<Menu[]>([]);
 
-  const getMenus = async() => {
-    const menus = await getMenuData();
+  const getMenusData = async() => {
+    const menus = await getMenus();
     setMenus(menus);
   }
 
-  console.log(menus);
+  const [ successAlertVisible, setSuccessAlertVisible ] = useState<{display: string}>({display: "none"});
 
-  // const addToMenu = (menuname) => {
+  const addToMenu = async (menunameArg: string) => {
+    try {
+        const cocktail = await getCocktailById(id);
+        console.log(cocktail);
+        const addDrink = await Axios.put(`/menus/drinks/add/${menunameArg}`, cocktail);
+        console.log(addDrink);
+        setSuccessAlertVisible({display: "flex"});
+        setTimeout(function(){ setSuccessAlertVisible({display: "none"}) }, 1000);
 
-  // }
+    }
+    catch (error) {
+        console.log(error);
+    }
+    
+}
+
   
   useEffect(() => {
-    getMenus();
+    getMenusData();
     // return () => {
     //   cleanup?
     // };
@@ -51,30 +61,6 @@ const DrinkInfo: React.FC<Props> = ({
   
   return (
     <div className="container-fluid drink-info-container">
-      <div className="card" style={{width: "30rem"}}>
-        <img src={image_url} className="card-img-top" alt={name} />
-        <div className="card-body">
-          <h5 className="card-title">{name}</h5>
-          <p className="card-text">{instructions}</p>
-        </div>
-        <ul className="list-group list-group-flush">
-          <p>Ingredients</p>
-        {drinkIngredients.map((ing, ind) => ing ? <li className="list-group-item" key={ind}>{ing}</li> : null)}
-        </ul>
-        <div className="card-body">
-            <p>Glass: {glass}</p>
-            <div className="dropdown">
-                <button className="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Add to Menu
-                </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  {menus ? menus.map((menu) => (
-                    <a className="dropdown-item" onClick={e => console.log(menu.menuname)}>{menu.menuname}</a>
-                  )) : ""}
-                </div>
-            </div>
-        </div>
-      </div>
       <div className="card mb-3" style={{maxWidth: "60em"}}>
       <div className="row no-gutters">
         <div className="col-md-6">
@@ -87,19 +73,20 @@ const DrinkInfo: React.FC<Props> = ({
             <div className="card-body">
             <p>Glass: {glass}</p>
             <ul className="list-group list-group-flush">
-          <p>Ingredients</p>
+          <p className="list-group-item">Ingredients:</p>
         {drinkIngredients.map((ing, ind) => ing ? <li className="list-group-item" key={ind}>{ing}</li> : null)}
         </ul>
-            <div className="dropdown">
+            <div className="dropdown list-group-item">
                 <button className="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Add to Menu
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   {menus ? menus.map((menu) => (
-                    <a className="dropdown-item" onClick={e => console.log(menu.menuname)}>{menu.menuname}</a>
+                    <a className="dropdown-item" onClick={e => addToMenu(menu.menuname)}>{menu.menuname}</a>
                   )) : ""}
                 </div>
             </div>
+            <div style={{display: successAlertVisible.display}} className="alert alert-warning" role="alert">Drink added.</div>
         </div>
           </div>
         </div>

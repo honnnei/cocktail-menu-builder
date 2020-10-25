@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getRandomCocktail, Cocktail, DrinkDetails, DrinkDetailsEdited } from '../api/API';
+import { DrinkDetails } from '../types/types';
 import DrinkInfo from '../components/DrinkInfo';
-import { RouteComponentProps } from "react-router-dom";
-import { getCocktailById } from '../api/API';
+import { getCocktailById } from '../api/cocktail_api';
 
 
 const DrinkInfoPage: React.FunctionComponent<any> = (props) => {
-  // const yourStateProp = props.match.params.drinkId;
-  // console.log(yourStateProp);
   const [ searchResults, setSearchResults] = useState<DrinkDetails[]>([]);
 
   const getCocktailData = async () => {
@@ -22,7 +19,7 @@ const DrinkInfoPage: React.FunctionComponent<any> = (props) => {
 
   return (
     <div className="container-fluid">
-        { searchResults ? searchResults.map((drink, index) => (
+        { searchResults ? searchResults.map((drink) => (
           <DrinkInfo 
           id={drink.id} 
           alcoholic={drink.alcoholic} 
