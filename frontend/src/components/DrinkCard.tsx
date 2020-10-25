@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu } from '../types/types';
+import { getCocktailById } from '../api/cocktail_api';
 import Axios from 'axios';
 
     type Props = {
@@ -17,10 +18,16 @@ import Axios from 'axios';
     currentMenus
     }) => {
 
+        const [ successAlertVisible, setSuccessAlertVisible ] = useState<{display: string}>({display: "none"});
+
         const addToMenu = async (menunameArg: string) => {
             try {
-                const addDrink = await Axios.put(`/menus/drinks/add/${menunameArg}`, {id: id, name: name, image_url});
+                const cocktail = await getCocktailById(id);
+                console.log(cocktail);
+                const addDrink = await Axios.put(`/menus/drinks/add/${menunameArg}`, cocktail);
                 console.log(addDrink);
+                setSuccessAlertVisible({display: "flex"});
+                setTimeout(function(){ setSuccessAlertVisible({display: "none"}) }, 1000);
             }
             catch (error) {
                 console.log(error);
@@ -47,6 +54,7 @@ import Axios from 'axios';
                             <button className="dropdown-item" onClick={e => addToMenu(menu.menuname)}>{menu.menuname}</button>
                             )) : ""}
                         </div>
+                        <div style={successAlertVisible} className="alert alert-warning" role="alert">Drink added.</div>
                     </div>
                     </li>
                 </ul>

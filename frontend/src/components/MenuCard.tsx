@@ -15,6 +15,16 @@ const MenuCard: React.FC<MenuC> = ({
     getMenusAgain
   }) => {
 
+    const [ currentDrinkIndex, setCurrentDrinkIndex ] = useState<number>(-1);
+
+    const handleMouseEnter = (drinkindex: number) => {
+        setCurrentDrinkIndex(drinkindex);
+    }
+
+    const handleMouseLeave = (drinkindex: number) => {
+        setCurrentDrinkIndex(-1);
+    }
+
 
     const deleteMenu = async (menunameArg: string) => {
 
@@ -47,16 +57,26 @@ const MenuCard: React.FC<MenuC> = ({
 
     return (
         <div className="card" style={{width: '18rem'}}>
-            <img src='https://image.flaticon.com/icons/svg/165/165979.svg' className="card-img-top" alt={'picture of a cocktail'} />
+            <img src={drinks[0] ? drinks[0].image_url : 'https://image.flaticon.com/icons/svg/165/165979.svg'} className="card-img-top" alt={'picture of a cocktail'} />
             <div className="card-body">
                 <h5 className="card-title">{menuname}</h5>
                 <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <ul className="list-group list-group-flush">
             {drinks ? drinks.map((drink: any, index:number) => (
-            <li className="list-group-item"><Link to={`/cocktails/${drink.id}`} className="card-link text-dark">{drink.name}</Link><button onClick={e => deleteDrink(menuname, index)} type="button" className="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button></li>
+                <li className="list-group-item" onMouseEnter={e => handleMouseEnter(index)} onMouseLeave={e => handleMouseLeave(index)}>
+                    <Link to={`/cocktails/${drink.id}`} className="card-link text-dark">
+                        {drink.name}
+                    </Link>
+                    <button onClick={e => deleteDrink(menuname, index)} type="button" className="close" aria-label="Delete">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div 
+                    style={currentDrinkIndex === index ? {display: "flex"} : {display: "none"}}
+                    >
+                        <p className="text-danger">{drink.drinkIngredients?.map((d: string) => `${d} ` )}</p>
+                    </div>
+                </li>
             )) : null }
             </ul>
             <div className="card-body">
