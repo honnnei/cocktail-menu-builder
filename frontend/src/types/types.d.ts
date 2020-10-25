@@ -1,7 +1,13 @@
-export interface Cocktail {
+export interface CocktailOriginal {
     idDrink: string;
     strDrink: string;
     strDrinkThumb: string;
+}
+
+export interface Cocktail {
+    id: string;
+    name: string;
+    image_url: string;
 }
 
 export interface DrinkDetails {

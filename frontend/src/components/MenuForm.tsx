@@ -27,7 +27,7 @@ const MenuForm: React.FC<{getMenusAgain: () => any}> = ({
 
     return (
         <>
-        <button type="button" className="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" style={{margin: "2em"}}className="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
         Create a New Menu
         </button>
         <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
