@@ -6,6 +6,7 @@ import RandomDrink from '../containers/RandomDrink';
 import Menus from '../containers/Menus';
 import Navbar from '../components/Navbar';
 import DrinkInfoPage from '../containers/DrinkInfoPage';
+import MenuViewPage from '../containers/MenuViewPage';
 import Header from '../components/Header';
 const Routes = () => {
   
@@ -41,6 +42,11 @@ const Routes = () => {
                       path='/menus'
                       exact 
                       component={Menus}
+                  />
+                  <Route
+                      path='/menu-view/:menuname'
+                      exact 
+                      render={(props) => <MenuViewPage {...props} />}
                   />
                </Switch>
             </Router>

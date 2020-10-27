@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DrinkDetailsEdited, Menu } from '../types/types';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
+import PDF from './PDF';
 
 interface MenuC {
     menuname: string,
@@ -77,6 +78,9 @@ const MenuCard: React.FC<MenuC> = ({
             <div className="card-body">
                 <button className="btn btn-outline-dark" onClick={e => deleteMenu(menuname)}>Delete Menu</button>
             </div>
+            <Link to={`/menu-view/${menuname}`} className="btn btn-outline-dark">
+                        View Menu
+                    </Link>
         </div>
     )
 }

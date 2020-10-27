@@ -29,7 +29,6 @@ function Menus() {
                 <MenuCard menuname={menu.menuname} drinks={menu.drinks} getMenusAgain={callGetMenus}/>
             )) : null}
             </div>
-            <PDF />
         </div>
     );
 }

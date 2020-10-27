@@ -5,9 +5,9 @@ export async function getMenus() {
     return menus.data;
 }
 
-export async function getSingleMenu() {
-//     const menus = await Axios('/menus');
-//     return menus.data;
+export async function getSingleMenu(menunameArg: string) {
+    const menu = await Axios(`/menus/${menunameArg}`);
+    return menu.data;
 }
 
 export async function createMenu() {

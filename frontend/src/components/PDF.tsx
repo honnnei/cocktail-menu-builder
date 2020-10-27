@@ -3,13 +3,16 @@ import Axios from 'axios';
 // import jsPDF from 'jspdf';
 // import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
+import { Menu } from '../types/types';
 
-const PDF = () => {
 
+const PDF: React.FC<Menu> = ({
+    menuname, 
+    drinks
+  }) => {
 
 const generatePDF = () => {
-    const menu = {name: "summer"};
-    Axios.post('/create-pdf', menu)
+    Axios.post('/create-pdf', {menuname: menuname, drinks: drinks})
         .then(() => Axios.get('/get-pdf', { responseType: 'blob'}))
         .then((res) => {
             const pdfBlob = new Blob([res.data], { type: 'application/pdf'});
@@ -19,11 +22,7 @@ const generatePDF = () => {
    
     return (
         <div>
-            <button onClick={generatePDF}>PDF</button>
-                        <div id="capture">
-                <p>Hello in my life</p>
-                <span>How can hellp you</span>
-            </div>
+            <button className="btn btn-outline-dark" onClick={generatePDF}>PDF</button>
         </div>
     );
 }

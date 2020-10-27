@@ -8,6 +8,12 @@ const Menu = require('../models/menu');
     .catch(next);
   });
 
+  router.get('/:menuname', function(req, res, next) {
+    Menu.findOne({menuname: req.params.menuname})
+    .then((menu) => res.json(menu))
+    .catch(next);
+  });
+
   router.post('/',  async function(req, res, next) {
     Menu.findOne({menuname: req.body.menuname})
     .then((result) => {
