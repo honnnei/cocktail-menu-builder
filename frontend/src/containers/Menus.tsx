@@ -3,6 +3,7 @@ import MenuForm from '../components/MenuForm';
 import MenuCard from '../components/MenuCard';
 import { getMenus } from '../api/menu_api';
 import { Menu } from '../types/types';
+import PDF from '../components/PDF';
 
 
 function Menus() {
@@ -28,6 +29,7 @@ function Menus() {
                 <MenuCard menuname={menu.menuname} drinks={menu.drinks} getMenusAgain={callGetMenus}/>
             )) : null}
             </div>
+            <PDF />
         </div>
     );
 }
